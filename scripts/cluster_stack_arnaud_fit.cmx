@@ -1,0 +1,85 @@
+adddataset name=mos type=uvf;
+mos.size   = 0.2 deg;
+mos.npix   = 128;
+mos.wtscale = 2;
+
+//------------------------------------------------------------
+// Use stacking to combine all WB observations into a single UVF model
+//------------------------------------------------------------
+
+mos.file += ${MADCOWS_REDUC}/W0123+25/WB/src_W0123+25_20140828_073659_A_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W0037+33/WB/src_W0037+33_20140827_094640_A_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W0037+33/WB/src_W0037+33_20140830_071350_C_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W0037+33/WB/src_W0037+33_20140912_062112_B_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1231+65/WB/src_W1231+65_20140907_215807_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140901_142008_B_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140902_155632_C_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140923_125327_C_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140924_125450_D_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140831_234308_B_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140915_002626_B_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140915_160957_C_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140915_160957_D_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140920_235123_B_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140921_183347_E_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140921_203547_D_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W2231+11/WB/src_W2231+11_20140910_045432_D_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1521+04/WB/src_W1521+04_20140904_015959_B_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1521+04/WB/src_W1521+04_20140904_210921_A_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1521+04/WB/src_W1521+04_20140924_000039_D_WB.uvf;
+mos.file += ${MADCOWS_REDUC}/W1418+07/WB/src_W1418+07_20140904_222329_A_WB.uvf;
+
+//------------------------------------------------------------
+// Climax has to guess at the antenna type on read-in, and the default
+// assumption is that 8-antenna data marked 'SZA' contains SZA
+// antennas.
+//
+// We change this for a specific dataset (and all component datasets
+// of that dataset) by changing the corresponding obs parameters
+//------------------------------------------------------------
+
+mos.obs.nant = 8;
+mos.obs.ant.type = BIMA;
+
+//------------------------------------------------------------
+// Add the A10 model
+//------------------------------------------------------------
+
+addmodel name=m_cluster type=arnaudmodel;
+
+//------------------------------------------------------------
+// Assign priors and/or values to Arnaud model parameters.
+// 
+// Note that when M500 is specified, Climax will automatically compute
+// the Arnaud pressure normalization from the mass normalization.
+// Since this normalization implies self-similarity, you cannot
+// separately specify thetaCore -- this will be calculated from 
+// M500 -- and Climax will complain if you try
+//------------------------------------------------------------
+
+m_cluster.spectralType = sz;
+m_cluster.normalizationFrequency = 30 GHz;
+
+m_cluster.M500 = 1e14:1e16 Msolar;
+m_cluster.xoff = -60:60";
+m_cluster.yoff = -60:60";
+
+//------------------------------------------------------------
+// To convert from M500 to pressure, the A10 normalization requires
+// that the cosmology be specified.  
+//------------------------------------------------------------
+
+addmodel name=cosmo type=cosmo;
+
+cosmo.z      = 0.168;
+cosmo.H0     = 70 km/s/Mpc;
+cosmo.omegaM = 0.3;
+cosmo.omegaL = 0.7;
+
+//------------------------------------------------------------
+// Directives controlling the run itself
+//------------------------------------------------------------
+
+ntry  = 10000;
+nburn = 3000;
+nbin  = 50;

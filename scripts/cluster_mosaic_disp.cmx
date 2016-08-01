@@ -1,0 +1,100 @@
+//============================================================
+// Example of creating data + model + residual plot for a mosaicked
+// dataset
+//============================================================
+
+//============================================================
+// First define the mosaicked dataset
+//============================================================
+
+adddataset name=mos type=mos;
+
+mos.file  = ../data/MS0735_p1.uvf;
+mos.file += ../data/MS0735_p2.uvf;
+
+//------------------------------------------------------------
+// The size to which individual datasets will be gridded.  
+//
+// I don't recommend making this any larger than 128x128 for now,
+// because the mosaicked datasets require a large memory footprint
+// (separate gridders for each antenna pair (6) x freq combination
+// (16-24 for CARMA23) x number of datasets x a factor of ~several
+// because of climax optimizations for speed, which can quickly max
+// out your computer's RAM)
+//------------------------------------------------------------
+
+mos.npix = 128;
+mos.size = 0.22 degrees;
+
+// Uncomment the following if you want to see diagnostic plots while
+// the data is loading
+//
+//mos.display = true;
+//mos.interactive = true;
+
+//------------------------------------------------------------
+// Apply a uvtaper to the data on read-in, and optionally scale the
+// weights (for miriad-derived CARMA23 data, weights are twice what
+// they should be in the usual UVF convention)
+//------------------------------------------------------------
+
+mos.uvtaper = 0.1,5000;
+mos.wtscale = 2;
+
+//------------------------------------------------------------
+// These control display:
+//
+// 'power' is the power point of the primary beam beyond which images
+// for each antenna pair/frequency combination will be masked before
+// coadding to make the final mosaicked map
+//
+// 'wtmin' sets the minimum weight in the combined map.  The final
+// image will be truncated at the boundary beyond which the weight is
+// below this limit
+//
+// 'cmap' is the colormap to use for all images
+//
+// 'zmin' and 'zmax' control the display min/max for greyscale plots
+//------------------------------------------------------------
+
+mos.cmap = grey;
+mos.zmin = 0;
+mos.zmax = 0;
+mos.wtmin = 5000;
+mos.power = 0.1;
+
+// Setting these parameters allows us to output images of the data,
+// model or residuals (noise)
+//
+//mos.dataimage  = mosdata.fits;
+//mos.modelimage = mosmodel.fits;
+//mos.resimage   = mosres.fits;
+
+//------------------------------------------------------------
+// Add any models we want to remove from the data.
+//------------------------------------------------------------
+
+addmodel name=ptsrc1 type=ptsrc;
+ptsrc1.Sradio = 0.3 mJy;
+
+// If we specify the absolute position of any model component for
+// mosaics, it will be used to locate the model relative to the mosaic
+// center.  However, if we don't specify one, the center of the mosaic
+// will be assumed. Thus the following is equivalent to the above:
+//
+//ptsrc1.ra    = mos.ra;
+//ptsrc1.dec   = mos.dec;
+
+//------------------------------------------------------------
+// With display = true, climax will create the dataset portion
+// of the triangle plots, as if a markov chain had been run
+//------------------------------------------------------------
+
+display = true;
+
+
+
+
+
+
+

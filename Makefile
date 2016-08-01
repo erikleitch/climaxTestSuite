@@ -1,0 +1,2 @@
+all:
+	gzip data/*.gz

@@ -1,0 +1,62 @@
+//------------------------------------------------------------
+// We add this dataset as a mosaic, because it allows us to subtract
+// different models from each component dataset (as opposed to a uvf
+// dataset, which assumes the same model for all component files)
+//------------------------------------------------------------
+
+adddataset name=mos type=mos;
+mos.size = 0.2 deg;
+mos.npix =128;
+mos.uvtaper = 0.5,5000;
+
+mos.ra =  12:56:02.214240;
+mos.dec= 21:03:17.056800;
+
+//------------------------------------------------------------
+// First component is W1256+21, and there are 4 WB data files + 2 SL
+// data files
+//------------------------------------------------------------
+
+mos.file += ${MADCOWS_REDUC}/W1256+21/WB/src_W1256+21_20140831_211134_D_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1256+21/WB/src_W1256+21_20140915_181430_D_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1256+21/WB/src_W1256+21_20140921_232142_C_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1256+21/WB/src_W1256+21_20140922_184156_F_WB.uvf;
+
+mos.dataset1.file += ${MADCOWS_REDUC}/W1256+21/SL/src_W1256+21_20140831_211134_D_SL.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1256+21/SL/src_W1256+21_20140915_181430_D_SL.uvf;
+
+mos.dataset1.dataset1.obs.nant = 8;
+mos.dataset1.dataset1.obs.ant.type = BIMA;
+mos.dataset1.dataset2.obs.nant = 8;
+mos.dataset1.dataset2.obs.ant.type = BIMA;
+mos.dataset1.dataset3.obs.nant = 8;
+mos.dataset1.dataset3.obs.ant.type = BIMA;
+mos.dataset1.dataset4.obs.nant = 8;
+mos.dataset1.dataset4.obs.ant.type = BIMA;
+
+//------------------------------------------------------------
+// Second component is W1310+28 and there is 1 WB + 1 SL data file
+//------------------------------------------------------------
+
+mos.file += ${MADCOWS_REDUC}/W1310+28/WB/src_W1310+28_20140909_190925_D_WB.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1310+28/SL/src_W1310+28_20140909_190925_D_SL.uvf;
+
+mos.dataset2.dataset1.obs.nant = 8;
+mos.dataset2.dataset1.obs.ant.type = BIMA;
+
+//------------------------------------------------------------
+// Third component is W2317+28
+//------------------------------------------------------------
+
+mos.file += ${MADCOWS_REDUC}/W2317+28/WB/src_W2317+28_20140901_100229_D_WB.uvf;
+mos.dataset3.file += ${MADCOWS_REDUC}/W2317+28/WB/src_W2317+28_20140920_031407_B_WB.uvf;
+
+mos.dataset3.file += ${MADCOWS_REDUC}/W2317+28/SL/src_W2317+28_20140901_100229_D_SL.uvf;
+mos.dataset3.file += ${MADCOWS_REDUC}/W2317+28/SL/src_W2317+28_20140920_031407_B_SL.uvf;
+
+mos.dataset3.dataset1.obs.nant = 8;
+mos.dataset3.dataset1.obs.ant.type = BIMA;
+mos.dataset3.dataset2.obs.nant = 8;
+mos.dataset3.dataset2.obs.ant.type = BIMA;
+
+display=true;

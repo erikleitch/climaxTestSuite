@@ -1,0 +1,89 @@
+adddataset name=mos type=mos;
+mos.size = 0.2 deg;
+mos.npix =128;
+mos.power = 0.2;
+mos.uvtaper = 0.5,2500;
+mos.wtscale = 2;
+
+//------------------------------------------------------------
+// Set the position of this mosaic to something arbitrary.  This just
+// forces every pointing to have the same position
+//------------------------------------------------------------
+
+mos.ra =  12:56:02.214240;
+mos.dec= 21:03:17.056800;
+
+
+//------------------------------------------------------------
+
+// Use stacking to combine all WB observations into a single pointing
+// within the mosaic.
+//
+// We do this by first adding a new pointing via the 'mos.file +='
+// directive, which adds a new uvf dataset to the mosaic called
+// mos.dataset1
+//
+// Then we access that dataset explicitly and add additional files to
+// it using its 'file +=' directive, which coadds data into the stack
+//------------------------------------------------------------
+
+mos.file += ${MADCOWS_REDUC}/W0123+25/WB/src_W0123+25_20140828_073659_A_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W0037+33/WB/src_W0037+33_20140827_094640_A_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W0037+33/WB/src_W0037+33_20140830_071350_C_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W0037+33/WB/src_W0037+33_20140912_062112_B_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1231+65/WB/src_W1231+65_20140907_215807_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140901_142008_B_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140902_155632_C_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140923_125327_C_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W0944+37/WB/src_W0944+37_20140924_125450_D_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140831_234308_B_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140915_002626_B_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140915_160957_C_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140915_160957_D_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140920_235123_B_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140921_183347_E_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1205+34/WB/src_W1205+34_20140921_203547_D_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W2231+11/WB/src_W2231+11_20140910_045432_D_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1521+04/WB/src_W1521+04_20140904_015959_B_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1521+04/WB/src_W1521+04_20140904_210921_A_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1521+04/WB/src_W1521+04_20140924_000039_D_WB.uvf;
+mos.dataset1.file += ${MADCOWS_REDUC}/W1418+07/WB/src_W1418+07_20140904_222329_A_WB.uvf;
+
+//------------------------------------------------------------
+// Climax has to guess at the antenna type on read-in, and the default
+// assumption is that 8-antenna data marked 'SZA' contains SZA
+// antennas.
+//
+// We change this for a specific dataset (and all component datasets
+// of that dataset) by changing the corresponding obs parameters
+//------------------------------------------------------------
+
+mos.dataset1.obs.nant = 8;
+mos.dataset1.obs.ant.type = BIMA;
+
+//------------------------------------------------------------
+// Add a second 'pointing' to the mosaic for the SL data, and stack
+// all SL files into that pointing the same way we did the WB files
+//------------------------------------------------------------
+
+mos.file += ${MADCOWS_REDUC}/W0123+25/SL/src_W0123+25_20140828_073659_A_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W0037+33/SL/src_W0037+33_20140827_094640_A_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W0037+33/SL/src_W0037+33_20140830_071350_C_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W0037+33/SL/src_W0037+33_20140912_062112_B_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1231+65/SL/src_W1231+65_20140907_215807_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1231+65/SL/src_W1231+65_20140908_173946_A_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W0944+37/SL/src_W0944+37_20140901_142008_B_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W0944+37/SL/src_W0944+37_20140902_155632_C_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1205+34/SL/src_W1205+34_20140831_234308_B_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1205+34/SL/src_W1205+34_20140915_002626_B_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1205+34/SL/src_W1205+34_20140915_160957_C_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W2231+11/SL/src_W2231+11_20140910_045432_D_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1521+04/SL/src_W1521+04_20140904_015959_B_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1521+04/SL/src_W1521+04_20140904_210921_A_SL.uvf;
+mos.dataset2.file += ${MADCOWS_REDUC}/W1418+07/SL/src_W1418+07_20140904_222329_A_SL.uvf;
+
+//------------------------------------------------------------
+// Finally, display the result
+//------------------------------------------------------------
+
+display = true;

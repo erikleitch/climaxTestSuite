@@ -1,0 +1,24 @@
+adddataset name=mos type=mos;
+mos.size = 0.2 deg;
+mos.npix = 128;
+mos.power = 0.2;
+
+if(false) {
+  mos.display = true;
+  mos.interactive = true;
+}
+
+mos.ra =  12:56:02.214240;
+mos.dec= 21:03:17.056800;
+
+mos.wtscale = 2;
+
+mos.file += ${MADCOWS_REDUC}/W0230-06/SL/src_W0230-06_20140831_104055_C_SL.uvf, shift=0.7,0.7';
+mos.dataset1.file += ${MADCOWS_REDUC}/W0230-06/SL/src_W0230-06_20140831_104055_C_SL.uvf, shift=-0.7,0.7';
+mos.dataset1.file += ${MADCOWS_REDUC}/W0230-06/SL/src_W0230-06_20140831_104055_C_SL.uvf, shift=1.618,-1.176';
+mos.dataset1.file += ${MADCOWS_REDUC}/W0230-06/SL/src_W0230-06_20140831_104055_C_SL.uvf, shift=0.618,-1.902';
+mos.dataset1.file += ${MADCOWS_REDUC}/W0230-06/SL/src_W0230-06_20140831_104055_C_SL.uvf, shift=-0.618,-1.902';
+mos.dataset1.file += ${MADCOWS_REDUC}/W0230-06/SL/src_W0230-06_20140831_104055_C_SL.uvf, shift=-1.618,-1.176';
+
+
+display = true;
