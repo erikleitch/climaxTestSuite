@@ -1,4 +1,5 @@
-# climaxTestSuite - A set of sample scripts for use with climax (see https://github.com/erikleitch/climax).
+# climaxTestSuite
+A set of sample scripts for use with climax (see https://github.com/erikleitch/climax).
 
 ## Simple cluster fitting
 
