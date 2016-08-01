@@ -5,7 +5,8 @@ A set of sample scripts for use with climax (see https://github.com/erikleitch/c
 
 * <a href=#cluster_fit>Simple cluster fitting</a>
 * <a href=#mosaic_disp>Displaying mosaicked data</a>
-* <a href=#stacked_fit>Fitting stacked data</a>
+* <a href=#stacked_fit>Simple stacked data</a>
+* <a href=#stacked_mosaic_disp>Mosaicked stacked data</a>
   
 # <a name=cluster_fit>Simple cluster fitting</a>
 
@@ -35,7 +36,7 @@ should eventually produce a plot that looks something like:
 
 displaying the mosaicked data, model and residuals.
 
-# <a name=stack_fit>Fitting stacked data</a>
+# <a name=stack_fit>Simple stacked data</a>
 
 A simple example of stacking multiple observations in a UVF dataset and fitting to the result is given in ```scripts/cluster_stack_arnaud_fit.cmx```.
 
@@ -49,4 +50,10 @@ should eventually produce a plot that looks something like:
 
 displaying the mosaicked data, model and residuals.
 
+# <a name=stacked_mosaic_disp>Mosaicked stacked data</a>
 
+A simple example of stacking multiple observations into pointings of a mosaic and displaying the result is given in ```scripts/mosaic_stack.cmx```.
+
+A simple example of stacking multiple observations with position shifts into pointings of a mosaic and displaying the result is given in ```scripts/mosaic_stack_with_shifts.cmx```.
+
+A simple example of stacking multiple observations into pointings of a mosaic, removing independent models from each pointing, and displaying the result is given in ```scripts/mosaic_stack_with_models.cmx```.
