@@ -39,8 +39,7 @@ displaying the mosaicked data, model and residuals.
 # <a name=stack_fit>Simple stacked data</a>
 
 A simple example of stacking multiple observations into a single UVF
-dataset and fitting to the result is given in
-```scripts/cluster_stack_arnaud_fit.cmx```.
+dataset and fitting to the result is given in ```scripts/cluster_stack_arnaud_fit.cmx```.
 
 ```
 cd scripts
@@ -55,8 +54,7 @@ displaying the mosaicked data, model and residuals.
 # <a name=stack_mosaic_disp>Mosaicked stacked data</a>
 
 A simple example of stacking multiple observations into pointings of a
-mosaic and displaying the result is given in
-```scripts/mosaic_stack.cmx```.
+mosaic and displaying the result is given in```scripts/mosaic_stack.cmx```.
 
 A simple example of stacking multiple observations with position
 shifts into pointings of a mosaic and displaying the result is given
