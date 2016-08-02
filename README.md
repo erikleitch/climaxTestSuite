@@ -20,7 +20,7 @@ should eventually produce a plot that looks something like:
 
 ![ClusterFit](https://github.com/erikleitch/climaxTestSuite/blob/master/images/cluster_arnaud_fit.png)
 
-displaying the data, model, residuals and parameter constraints.
+displaying the data, model, residuals and parameter constraints.  *NB: this script uses data provided in the data directory, so this repository is sufficient to run the script*
 
 # <a name=mosaic_disp>Displaying mosaicked data</a>
 
@@ -34,8 +34,10 @@ should eventually produce a plot that looks something like:
 
 ![ClusterFit](https://github.com/erikleitch/climaxTestSuite/blob/master/images/cluster_mosaic_disp.png)
 
-displaying the mosaicked data, model and residuals.
+displaying the mosaicked data, model and residuals.   *NB: this script uses data provided in the data directory, so this repository is sufficient to run the script*
 
+ *NB: The following scripts look for appropriate data on your local machine, and are provided only as examples of how to use the relevant climax commands*
+ 
 # <a name=stack_fit>Simple stacked data</a>
 
 A simple example of stacking multiple observations into a single UVF
