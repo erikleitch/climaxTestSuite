@@ -1,2 +1,2 @@
 all:
-	gzip data/*.gz
+	gunzip -k data/*.gz
